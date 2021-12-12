@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/oleg/AndroidStudioProjects/MovieSearchApp/app/src/main/res/layout/activity_main.xml" value="0.10144927536231885" />
+        <entry key="..\:/Users/oleg/AndroidStudioProjects/MovieSearchApp/app/src/main/res/layout/item_description_film.xml" value="0.1693840579710145" />
         <entry key="..\:/Users/oleg/AndroidStudioProjects/MovieSearchApp/app/src/main/res/layout/item_for_rs_film.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/oleg/AndroidStudioProjects/MovieSearchApp/app/src/main/res/layout/rs_film.xml" value="0.10054347826086957" />
       </map>

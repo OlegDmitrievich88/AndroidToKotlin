@@ -1,8 +1,9 @@
-package com.maksapp.moviesearchapp
+package com.maksapp.moviesearchapp.View
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.maksapp.moviesearchapp.FragmentForActivity.Companion.newInstance
+import com.maksapp.moviesearchapp.View.FragmentForActivity.Companion.newInstance
+import com.maksapp.moviesearchapp.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
