@@ -21,10 +21,10 @@ return getDefaultFilm()
 fun getFilm(): List<DescriptionFilm> {
     return listOf(
         DescriptionFilm(Film(R.drawable.ebrg,"zdgdsg"),0,"","",""),
-        DescriptionFilm(Film(R.drawable.ebrg,"dsgds"),1,"","",""),
-        DescriptionFilm(Film(R.drawable.ebrg,"sdgdsg"),2,"","",""),
-        DescriptionFilm(Film(R.drawable.ebrg,"dsgdsfgds"),3,"","",""),
-        DescriptionFilm(Film(R.drawable.ebrg,"sdgdszg"),4,"","",""),
+        DescriptionFilm(Film(R.drawable.msc,"dsgds"),1,"","",""),
+        DescriptionFilm(Film(R.drawable.nsk,"sdgdsg"),2,"","",""),
+        DescriptionFilm(Film(R.drawable.sam,"dsgdsfgds"),3,"","",""),
+        DescriptionFilm(Film(R.drawable.spb,"sdgdszg"),4,"","",""),
         DescriptionFilm(Film(R.drawable.ebrg,"gdsgzsd"),5,"","","")
     )
 }
