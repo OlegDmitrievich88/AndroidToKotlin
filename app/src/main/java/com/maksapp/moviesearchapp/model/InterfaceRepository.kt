@@ -1,5 +1,6 @@
 package com.maksapp.moviesearchapp.model
 
 interface InterfaceRepository {
-    fun getDescriptionForFilm():Film
-}
+    fun getDescriptionForFilm(): List<DescriptionFilm>
+    fun getFilmFromServer():DescriptionFilm
+} //интерфейс для взаимодействия с репозиторием

@@ -7,25 +7,33 @@ import androidx.recyclerview.widget.RecyclerView
 import com.maksapp.moviesearchapp.model.InterfaceForClick
 import com.maksapp.moviesearchapp.R
 import com.maksapp.moviesearchapp.databinding.ItemForRsFilmBinding
-import com.maksapp.moviesearchapp.model.Film
+import com.maksapp.moviesearchapp.model.DescriptionFilm
 
 class FilmRvAdapter(
 
-    private val listFilm: ArrayList<Film>,
+    //private val listFilm: ArrayList<Film>,
+
     private val itemClick: InterfaceForClick
 ) : RecyclerView.Adapter<FilmRvAdapter.FilmViewHolder>(){
 
+    private var cinemaList: List<DescriptionFilm> = listOf() // список фильмов с описанием
+
    // val filmList = ArrayList<Film>()
+
+   fun setCinema(data: List<DescriptionFilm>) {
+       cinemaList = data
+       notifyDataSetChanged()
+   }
 
     class FilmViewHolder(itemView: View, private val itemClick: InterfaceForClick) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemForRsFilmBinding.bind(itemView) // получили доступ к вьюхам
 
-        fun bind(film: Film, position: Int) = with(binding){
-            imageFilm.setImageResource(film.imageFilm)
-            textFilm.text = film.titleFilm
+        fun bind(film: DescriptionFilm) = with(binding){
+            imageFilm.setImageResource(film.film.imageFilm) //сетим постер фильма
+            textFilm.text = film.film.titleFilm // название фильма
             itemView.setOnClickListener {
-                itemClick?.onItemClicked(adapterPosition)
-            }
+                itemClick.onItemClicked(film)
+            }//обработали клик
 
         }
     } //создали класс вьюхолдер, тут создаем разметку
@@ -37,10 +45,11 @@ class FilmRvAdapter(
     }//тут нудуваем вьюху, создаем новый элемент
 
     override fun onBindViewHolder(holder: FilmViewHolder, position: Int) {
-       holder.bind(listFilm[position],position)
+        holder.bind(cinemaList[position])//передали позицию
+       //holder.bind(listFilm[position],position)
     }// тут заполняем вьюху
 
     override fun getItemCount(): Int {
-       return listFilm.size
+       return cinemaList.size
     }//тут узнаем размер списка
 } // создали адаптер для ресайкл вью

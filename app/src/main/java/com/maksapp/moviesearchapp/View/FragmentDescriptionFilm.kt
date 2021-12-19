@@ -8,17 +8,23 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
-import com.maksapp.moviesearchapp.R
 import com.maksapp.moviesearchapp.ViewModel.AppState
 import com.maksapp.moviesearchapp.ViewModel.ViewModelFilm
 import com.maksapp.moviesearchapp.databinding.ItemDescriptionFilmBinding
-import com.maksapp.moviesearchapp.model.DescriptionFilm
 
 class FragmentDescriptionFilm() : Fragment() {
 
     private lateinit var binding: ItemDescriptionFilmBinding
     private lateinit var viewModel: ViewModelFilm
 
+
+    companion object {
+        fun newInstance(bundle: Bundle): FragmentDescriptionFilm{
+            val fragment = FragmentDescriptionFilm()
+            fragment.arguments = bundle
+            return fragment
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,8 +48,8 @@ class FragmentDescriptionFilm() : Fragment() {
         when(state) {
             is AppState.Success ->{
                 binding.loading.visibility = View.GONE
-                val desc = state.descriptionFilm
-                binding.textView.text = desc.description
+
+              //  binding.textView.text = desc.
             }
             is AppState.Error ->{
                 binding.loading.visibility = View.VISIBLE
