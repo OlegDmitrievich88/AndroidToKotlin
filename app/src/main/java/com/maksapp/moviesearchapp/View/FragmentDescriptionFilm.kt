@@ -11,11 +11,14 @@ import com.google.android.material.snackbar.Snackbar
 import com.maksapp.moviesearchapp.ViewModel.AppState
 import com.maksapp.moviesearchapp.ViewModel.ViewModelFilm
 import com.maksapp.moviesearchapp.databinding.ItemDescriptionFilmBinding
+import com.maksapp.moviesearchapp.model.DescriptionFilm
+import com.maksapp.moviesearchapp.model.getFilm
+import kotlinx.android.synthetic.main.item_description_film.*
 
 class FragmentDescriptionFilm() : Fragment() {
 
     private lateinit var binding: ItemDescriptionFilmBinding
-    private lateinit var viewModel: ViewModelFilm
+   // private lateinit var viewModel: ViewModelFilm
 
 
     companion object {
@@ -29,38 +32,45 @@ class FragmentDescriptionFilm() : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = ItemDescriptionFilmBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ViewModelFilm::class.java)
-        viewModel.getData().observe(viewLifecycleOwner, Observer {
-            state -> render(state)
-        })// подписались на изменение данных
-        viewModel.getDescriptionFilm()// запросили изменения
 
-    }
-
-    private fun render(state: AppState) {
-        when(state) {
-            is AppState.Success ->{
-                binding.loading.visibility = View.GONE
-
-              //  binding.textView.text = desc.
-            }
-            is AppState.Error ->{
-                binding.loading.visibility = View.VISIBLE
-                Snackbar.make(binding.root,state.error.toString(),Snackbar.LENGTH_INDEFINITE)
-                    .setAction("попробй еще раз"){
-                        viewModel.getDescriptionFilm()
-                    }.show()
-            }
-            is AppState.Loading ->{
-                binding.loading.visibility = View.VISIBLE
-            }
+        val descriptionFilm = arguments?.getParcelable<DescriptionFilm>("Description")
+        descriptionFilm?.let {
+            image_film.setImageResource(descriptionFilm.film.imageFilm)
+            name_film.text = descriptionFilm.film.titleFilm
+            description_film.text = descriptionFilm.description
         }
+//        viewModel = ViewModelProvider(this).get(ViewModelFilm::class.java)
+//        viewModel.getData().observe(viewLifecycleOwner, Observer {
+//            state -> render(state)
+//        })// подписались на изменение данных
+//        viewModel.getDescriptionFilm()// запросили изменения
+
     }
+
+//    private fun render(state: AppState) {
+//        when(state) {
+//            is AppState.Success ->{
+//                //val listCinema: List<DescriptionFilm> = state.cinema
+//                binding.loading.visibility = View.GONE
+//                binding.textView.text = state.film.
+//            }
+//            is AppState.Error ->{
+//                binding.loading.visibility = View.VISIBLE
+//                Snackbar.make(binding.root,state.error.toString(),Snackbar.LENGTH_INDEFINITE)
+//                    .setAction("попробй еще раз"){
+//                        viewModel.getDescriptionFilm()
+//                    }.show()
+//            }
+//            is AppState.Loading ->{
+//                binding.loading.visibility = View.VISIBLE
+//            }
+//        }
+//    }
 }// фрагмент с описанием фильма

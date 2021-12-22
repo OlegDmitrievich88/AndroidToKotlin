@@ -10,17 +10,13 @@ import com.maksapp.moviesearchapp.databinding.ItemForRsFilmBinding
 import com.maksapp.moviesearchapp.model.DescriptionFilm
 
 class FilmRvAdapter(
-
-    //private val listFilm: ArrayList<Film>,
-
     private val itemClick: InterfaceForClick
+
 ) : RecyclerView.Adapter<FilmRvAdapter.FilmViewHolder>(){
 
     private var cinemaList: List<DescriptionFilm> = listOf() // список фильмов с описанием
 
-   // val filmList = ArrayList<Film>()
-
-   fun setCinema(data: List<DescriptionFilm>) {
+    fun setCinema(data: List<DescriptionFilm>) {
        cinemaList = data
        notifyDataSetChanged()
    }
@@ -34,7 +30,6 @@ class FilmRvAdapter(
             itemView.setOnClickListener {
                 itemClick.onItemClicked(film)
             }//обработали клик
-
         }
     } //создали класс вьюхолдер, тут создаем разметку
 
@@ -46,8 +41,7 @@ class FilmRvAdapter(
 
     override fun onBindViewHolder(holder: FilmViewHolder, position: Int) {
         holder.bind(cinemaList[position])//передали позицию
-       //holder.bind(listFilm[position],position)
-    }// тут заполняем вьюху
+           }// тут заполняем вьюху
 
     override fun getItemCount(): Int {
        return cinemaList.size
