@@ -11,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.maksapp.moviesearchapp.ViewModel.AppState
 import com.maksapp.moviesearchapp.ViewModel.ViewModelFilm
 import com.maksapp.moviesearchapp.databinding.ItemDescriptionFilmBinding
+import com.maksapp.moviesearchapp.model.DescriptionDTO
 import com.maksapp.moviesearchapp.model.DescriptionFilm
 import com.maksapp.moviesearchapp.model.getFilm
 import kotlinx.android.synthetic.main.item_description_film.*
@@ -40,11 +41,13 @@ class FragmentDescriptionFilm() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val descriptionFilm = arguments?.getParcelable<DescriptionFilm>("Description")
+        val descriptionFilm = arguments?.getParcelable<DescriptionDTO>("Description")
         descriptionFilm?.let {
-            image_film.setImageResource(descriptionFilm.film.imageFilm)
-            name_film.text = descriptionFilm.film.titleFilm
-            description_film.text = descriptionFilm.description
+            name_film.text = descriptionFilm.descDTO.title
+            description_film.text = descriptionFilm.descDTO.overview
+//            image_film.setImageResource(descriptionFilm.film.imageFilm)
+//            name_film.text = descriptionFilm.film.titleFilm
+//            description_film.text = descriptionFilm.description
         }
 //        viewModel = ViewModelProvider(this).get(ViewModelFilm::class.java)
 //        viewModel.getData().observe(viewLifecycleOwner, Observer {

@@ -5,7 +5,7 @@ class RepositoryFilm: InterfaceRepository {
         return getFilm()
     }
 
-    override fun getFilmFromServer(): DescriptionFilm {
-        TODO("Not yet implemented")
+    override fun getFilmFromServer(): List<DescriptionDTO> {
+        return getDesc()
     }
 }// тут будем получать данные

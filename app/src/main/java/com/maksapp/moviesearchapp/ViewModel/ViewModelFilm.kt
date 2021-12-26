@@ -3,11 +3,7 @@ package com.maksapp.moviesearchapp.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.maksapp.moviesearchapp.model.DescriptionFilm
-import com.maksapp.moviesearchapp.model.InterfaceRepository
-import com.maksapp.moviesearchapp.model.RepositoryFilm
-import java.lang.Exception
-import kotlin.random.Random
+import com.maksapp.moviesearchapp.model.*
 
 class ViewModelFilm: ViewModel() {
 
@@ -17,7 +13,17 @@ class ViewModelFilm: ViewModel() {
 
     fun getDescriptionFilm() {
       //  liveDataToObserver.value = AppState.Loading
-        liveDataToObserver.postValue(AppState.Success(repositoryCinema.getDescriptionForFilm()))
+       // liveDataToObserver.postValue(AppState.Success(repositoryCinema.getDescriptionForFilm()))
+       DescriptionFilmLoaderFromServer.loadDescription(object : InterfaceLoaderDescription {
+           override fun onLoad(descDTO: FactDescriptionDTO) {
+               TODO("Not yet implemented")
+           }
+
+           override fun onFailed(throwable: Throwable) {
+               TODO("Not yet implemented")
+           }
+       } )
+        liveDataToObserver.postValue(AppState.Success(repositoryCinema.getFilmFromServer()))
 //        Thread{
 //            Thread.sleep(2000)
 //

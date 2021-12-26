@@ -14,6 +14,7 @@ import com.maksapp.moviesearchapp.ViewModel.AppState
 import com.maksapp.moviesearchapp.ViewModel.ViewModelFilm
 
 import com.maksapp.moviesearchapp.databinding.RsFilmBinding
+import com.maksapp.moviesearchapp.model.DescriptionDTO
 import com.maksapp.moviesearchapp.model.DescriptionFilm
 import com.maksapp.moviesearchapp.model.Film
 
@@ -49,6 +50,7 @@ class FragmentForActivity: Fragment(), InterfaceForClick {
         viewModel.getData().observe(viewLifecycleOwner, Observer {
                 state -> render(state)
         })// подписались на изменение данных
+
         viewModel.getDescriptionFilm()//запросили данные
        // buildList()
 
@@ -56,7 +58,7 @@ class FragmentForActivity: Fragment(), InterfaceForClick {
     private fun render(state: AppState){
         when(state) {
             is AppState.Success ->{
-               val listCinema: List<DescriptionFilm> = state.cinema
+               val listCinema: List<DescriptionDTO> = state.cinema
                 adapter.setCinema(listCinema)
             }
         }
@@ -64,7 +66,7 @@ class FragmentForActivity: Fragment(), InterfaceForClick {
 
 
 
-    override fun onItemClicked(cinema: DescriptionFilm) {
+    override fun onItemClicked(cinema: DescriptionDTO) {
         val bundle = Bundle().apply { putParcelable("Description",cinema) }
 
         requireActivity().supportFragmentManager.beginTransaction()
