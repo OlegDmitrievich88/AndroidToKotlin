@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.maksapp.moviesearchapp.model.InterfaceForClick
 import com.maksapp.moviesearchapp.R
 import com.maksapp.moviesearchapp.databinding.ItemForRsFilmBinding
-import com.maksapp.moviesearchapp.model.DescriptionDTO
+import com.maksapp.moviesearchapp.model.FactDescriptionDTO
 
 class FilmRvAdapter(
     private val itemClick: InterfaceForClick
@@ -15,24 +15,24 @@ class FilmRvAdapter(
 ) : RecyclerView.Adapter<FilmRvAdapter.FilmViewHolder>(){
 
    // private var cinemaList: List<DescriptionFilm> = listOf() // список фильмов с описанием
-    private var cinemaListFromServer: List<DescriptionDTO> = listOf()
+    private var cinemaListFromServer: List<FactDescriptionDTO> = listOf()
 //    fun setCinema(data: List<DescriptionFilm>) {
 //       cinemaList = data
 //       notifyDataSetChanged()
 //   }
-    fun setCinema(data: List<DescriptionDTO>) {
-        cinemaListFromServer = data
+    fun setCinema(data: FactDescriptionDTO) {
+        cinemaListFromServer = data.results
         notifyDataSetChanged()
     }
 
     class FilmViewHolder(itemView: View, private val itemClick: InterfaceForClick) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemForRsFilmBinding.bind(itemView) // получили доступ к вьюхам
 
-        fun bind(film: DescriptionDTO) = with(binding){
+        fun bind(film: FactDescriptionDTO) = with(binding){
            // imageFilm.setImageResource(film.film.imageFilm) //сетим постер фильма
-            textFilm.text = film.descDTO.title // название фильма
+            textFilm.text = film.title// название фильма
             itemView.setOnClickListener {
-                itemClick.onItemClicked(film)
+                itemClick.onItemClicked(film.title)
             }//обработали клик
         }
     } //создали класс вьюхолдер, тут создаем разметку

@@ -21,9 +21,9 @@ object DescriptionFilmLoaderFromServer {
             var urlConnection: HttpsURLConnection? = null
 
             try {
-                val uri = URL("https://api.themoviedb.org/3/movie/popular?api_key=3ec60504f353a51aa5d8f9dc40c25f91&year=2021")
+                val uri = URL("https://api.themoviedb.org/3/movie/popular?api_key=3ec60504f353a51aa5d8f9dc40c25f91")
                 urlConnection = uri.openConnection() as HttpsURLConnection
-                urlConnection.addRequestProperty("themoviedb_api_key", API_KEY)
+               // urlConnection.addRequestProperty("api_key", API_KEY)
                 urlConnection.requestMethod = "GET"
                 urlConnection.readTimeout = 1000
                 urlConnection.connectTimeout = 1000

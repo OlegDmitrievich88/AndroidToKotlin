@@ -11,19 +11,23 @@ class ViewModelFilm: ViewModel() {
     private val repositoryCinema: InterfaceRepository = RepositoryFilm()
     fun getData(): LiveData<AppState> = liveDataToObserver
 
+    fun loadFromServer(){
+        DescriptionFilmLoaderFromServer.loadDescription(object : InterfaceLoaderDescription {
+            override fun onLoad(descDTO: FactDescriptionDTO) {
+              DescriptionDTO(descDTO)
+                liveDataToObserver.postValue(AppState.Success(descDTO))
+            }
+
+            override fun onFailed(throwable: Throwable) {
+                TODO("Not yet implemented")
+            }
+        } )
+    }
     fun getDescriptionFilm() {
       //  liveDataToObserver.value = AppState.Loading
        // liveDataToObserver.postValue(AppState.Success(repositoryCinema.getDescriptionForFilm()))
-       DescriptionFilmLoaderFromServer.loadDescription(object : InterfaceLoaderDescription {
-           override fun onLoad(descDTO: FactDescriptionDTO) {
-               TODO("Not yet implemented")
-           }
 
-           override fun onFailed(throwable: Throwable) {
-               TODO("Not yet implemented")
-           }
-       } )
-        liveDataToObserver.postValue(AppState.Success(repositoryCinema.getFilmFromServer()))
+       // liveDataToObserver.postValue(AppState.Success(repositoryCinema.getFilmFromServer()))
 //        Thread{
 //            Thread.sleep(2000)
 //
