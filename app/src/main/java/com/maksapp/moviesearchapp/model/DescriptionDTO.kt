@@ -6,11 +6,11 @@ import kotlinx.android.parcel.RawValue
 
 @Parcelize
 data class DescriptionDTO(
-    val descDTO: @RawValue FactDescriptionDTO
-//    val descCinema: String,
-//    val nameCinema: String,
-//    val ratingCinema: String,
-//    val posterCinema: Int
+    val descDTO: @RawValue FactDescriptionDTO,
+    val descCinema: String,
+    val nameCinema: String,
+    val ratingCinema: String,
+    val langCinema: String
 ): Parcelable
 
 fun getDesc():List<DescriptionDTO> {return listOf()}

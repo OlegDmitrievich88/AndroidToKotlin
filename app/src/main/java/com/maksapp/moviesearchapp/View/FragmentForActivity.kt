@@ -1,5 +1,6 @@
 package com.maksapp.moviesearchapp.View
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -44,6 +45,7 @@ class FragmentForActivity: Fragment(), InterfaceForClick {
 //            rsFilm.adapter = adapter
 //        }
 
+       // requireActivity().startService(Intent(requireContext(),LoadService::class.java))
 
         viewModel.getData().observe(viewLifecycleOwner, Observer {
                 state -> render(state)
@@ -69,8 +71,8 @@ class FragmentForActivity: Fragment(), InterfaceForClick {
 
 
 
-    override fun onItemClicked(cinema: String) {
-        val bundle = Bundle().apply {  }
+    override fun onItemClicked(cinema: FactDescriptionDTO) {
+        val bundle = Bundle().apply { putParcelable("Description",cinema) }
 
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container,FragmentDescriptionFilm.newInstance(bundle))

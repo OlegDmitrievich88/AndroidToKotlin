@@ -1,5 +1,9 @@
 package com.maksapp.moviesearchapp.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class FactDescriptionDTO(
     val results: List<FactDescriptionDTO>,
     val id: Int,
@@ -14,4 +18,4 @@ data class FactDescriptionDTO(
    // val vote_average: Int,
     val vote_count: Int,
 
-)
+): Parcelable

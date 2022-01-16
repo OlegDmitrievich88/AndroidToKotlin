@@ -1,20 +1,17 @@
 package com.maksapp.moviesearchapp.View
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.snackbar.Snackbar
-import com.maksapp.moviesearchapp.ViewModel.AppState
-import com.maksapp.moviesearchapp.ViewModel.ViewModelFilm
+import coil.load
 import com.maksapp.moviesearchapp.databinding.ItemDescriptionFilmBinding
 import com.maksapp.moviesearchapp.model.DescriptionDTO
-import com.maksapp.moviesearchapp.model.DescriptionFilm
-import com.maksapp.moviesearchapp.model.getFilm
-import kotlinx.android.synthetic.main.item_description_film.*
+import com.maksapp.moviesearchapp.model.FactDescriptionDTO
+import com.maksapp.moviesearchapp.model.LoadService
+
 
 class FragmentDescriptionFilm() : Fragment() {
 
@@ -41,39 +38,17 @@ class FragmentDescriptionFilm() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val descriptionFilm = arguments?.getParcelable<DescriptionDTO>("Description")
-        descriptionFilm?.let {
-            name_film.text = descriptionFilm.descDTO.title
-            description_film.text = descriptionFilm.descDTO.overview
-//            image_film.setImageResource(descriptionFilm.film.imageFilm)
-//            name_film.text = descriptionFilm.film.titleFilm
-//            description_film.text = descriptionFilm.description
+        val descriptionFilm = arguments?.getParcelable<FactDescriptionDTO>("Description")
+        val urlPoster = "https://image.tmdb.org/t/p/w500"+(descriptionFilm?.poster_path ?: 0)
+        with(binding){
+            descriptionFilm?.let {
+                nameFilm.text = descriptionFilm.title
+                descriptionsFilm.text = descriptionFilm.overview
+                imageFilm.load(urlPoster)
+            }
         }
-//        viewModel = ViewModelProvider(this).get(ViewModelFilm::class.java)
-//        viewModel.getData().observe(viewLifecycleOwner, Observer {
-//            state -> render(state)
-//        })// подписались на изменение данных
-//        viewModel.getDescriptionFilm()// запросили изменения
 
     }
 
-//    private fun render(state: AppState) {
-//        when(state) {
-//            is AppState.Success ->{
-//                //val listCinema: List<DescriptionFilm> = state.cinema
-//                binding.loading.visibility = View.GONE
-//                binding.textView.text = state.film.
-//            }
-//            is AppState.Error ->{
-//                binding.loading.visibility = View.VISIBLE
-//                Snackbar.make(binding.root,state.error.toString(),Snackbar.LENGTH_INDEFINITE)
-//                    .setAction("попробй еще раз"){
-//                        viewModel.getDescriptionFilm()
-//                    }.show()
-//            }
-//            is AppState.Loading ->{
-//                binding.loading.visibility = View.VISIBLE
-//            }
-//        }
-//    }
+
 }// фрагмент с описанием фильма

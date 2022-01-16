@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.maksapp.moviesearchapp.model.InterfaceForClick
 import com.maksapp.moviesearchapp.R
 import com.maksapp.moviesearchapp.databinding.ItemForRsFilmBinding
@@ -29,10 +30,11 @@ class FilmRvAdapter(
         private val binding = ItemForRsFilmBinding.bind(itemView) // получили доступ к вьюхам
 
         fun bind(film: FactDescriptionDTO) = with(binding){
-           // imageFilm.setImageResource(film.film.imageFilm) //сетим постер фильма
+            val urlPoster = "https://image.tmdb.org/t/p/w500"+(film.poster_path ?: 0)
+            imageFilm.load(urlPoster)
             textFilm.text = film.title// название фильма
             itemView.setOnClickListener {
-                itemClick.onItemClicked(film.title)
+                itemClick.onItemClicked(film)
             }//обработали клик
         }
     } //создали класс вьюхолдер, тут создаем разметку

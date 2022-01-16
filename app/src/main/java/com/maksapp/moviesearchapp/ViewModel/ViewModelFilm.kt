@@ -1,5 +1,6 @@
 package com.maksapp.moviesearchapp.ViewModel
 
+import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,7 +13,13 @@ class ViewModelFilm: ViewModel() {
     fun getData(): LiveData<AppState> = liveDataToObserver
 
     fun loadFromServer(){
-        DescriptionFilmLoaderFromServer.loadDescription(object : InterfaceLoaderDescription {
+//        requireActivity().startService(Intent(requireContext(),LoaderService::class.java).apply {
+//            putExtra("Description",descriptionFilm)
+//        })
+
+        liveDataToObserver.postValue(AppState.SuccessTwo(repositoryCinema.getFilmFromServer()))
+
+        DescriptionFilmLoaderFromServer.loadOkhttp(object : InterfaceLoaderDescription {
             override fun onLoad(descDTO: FactDescriptionDTO) {
               DescriptionDTO(descDTO)
                 liveDataToObserver.postValue(AppState.Success(descDTO))

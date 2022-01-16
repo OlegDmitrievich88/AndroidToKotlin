@@ -5,6 +5,10 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Film(
-    val imageFilm: Int, // изображение фильма
-    val titleFilm: String //название фильма
+    val imageFilm: Long, // изображение фильма
+    val titleFilm: Int, //название фильма
+    val descCinema: String,
+    val nameCinema: String,
+    val ratingCinema: String,
+    val langCinema: String
 ):Parcelable
