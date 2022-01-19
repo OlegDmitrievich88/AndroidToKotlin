@@ -1,16 +1,22 @@
 package com.maksapp.moviesearchapp.ViewModel
 
-import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.maksapp.moviesearchapp.View.App
 import com.maksapp.moviesearchapp.model.*
 
 class ViewModelFilm: ViewModel() {
 
     private val liveDataToObserver: MutableLiveData<AppState> = MutableLiveData()
     private val repositoryCinema: InterfaceRepository = RepositoryFilm()
+    private val repository: LocalRepository = LocalRepositoryIml(App.getHistoryDao())
     fun getData(): LiveData<AppState> = liveDataToObserver
+
+    fun saveHistory(dto: FactDescriptionDTO){
+        repository.saveFilm(dto)
+    }
+
 
     fun loadFromServer(){
 //        requireActivity().startService(Intent(requireContext(),LoaderService::class.java).apply {

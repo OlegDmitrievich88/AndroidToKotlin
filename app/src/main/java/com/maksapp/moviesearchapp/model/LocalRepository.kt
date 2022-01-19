@@ -2,7 +2,8 @@ package com.maksapp.moviesearchapp.model
 
 interface LocalRepository {
 
-    fun getAllHistory(): List<DescriptionDTO>
+   // fun getAllHistory(): List<FactDescriptionDTO>
 
-    fun saveFilm(film: DescriptionDTO)
+    fun saveFilm(film: FactDescriptionDTO)
+
 }

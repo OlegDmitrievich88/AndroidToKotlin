@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import coil.load
+import com.maksapp.moviesearchapp.ViewModel.ViewModelFilm
 import com.maksapp.moviesearchapp.databinding.ItemDescriptionFilmBinding
 import com.maksapp.moviesearchapp.model.DescriptionDTO
 import com.maksapp.moviesearchapp.model.FactDescriptionDTO
@@ -17,7 +19,9 @@ class FragmentDescriptionFilm() : Fragment() {
 
     private lateinit var binding: ItemDescriptionFilmBinding
    // private lateinit var viewModel: ViewModelFilm
-
+   private val viewModel: ViewModelFilm by lazy {
+       ViewModelProvider(this).get(ViewModelFilm::class.java)
+   }
 
     companion object {
         fun newInstance(bundle: Bundle): FragmentDescriptionFilm{
@@ -46,6 +50,9 @@ class FragmentDescriptionFilm() : Fragment() {
                 descriptionsFilm.text = descriptionFilm.overview
                 imageFilm.load(urlPoster)
             }
+        }
+        if (descriptionFilm != null) {
+            viewModel.saveHistory(descriptionFilm)
         }
 
     }

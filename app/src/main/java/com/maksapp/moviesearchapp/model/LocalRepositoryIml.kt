@@ -1,32 +1,41 @@
 package com.maksapp.moviesearchapp.model
 
-class LocalRepositoryIml (private val  dao: HistoryDAO):LocalRepository{
+import java.util.*
 
-    override fun getAllHistory(): List<DescriptionDTO> {
-        return dao.all()
-            .map { historyFilm ->
-                DescriptionDTO(
+class LocalRepositoryIml(private val dao: HistoryDAO):LocalRepository{
 
-                    nameCinema = historyFilm.nameFilm,
-                    ratingCinema = historyFilm.rating,
-                    descCinema = historyFilm.content,
-                    langCinema = historyFilm.lang
+//    override fun getAllHistory(): List<FactDescriptionDTO> {
+//        return dao.all()
+//            .map { historyFilm ->
+//                FactDescriptionDTO(
+//                    title = historyFilm.nameFilm,
+//                    original_language = historyFilm.lang,
+//                    popularity = historyFilm.rating,
+//                    overview = historyFilm.content
+//
+//
+//
+//
+//                )
+//
+//
+//
+//
+//
+//            }
+//    }
+//
 
-            )
 
-            }
-    }
-
-
-
-    override fun saveFilm(film: DescriptionDTO) {
+    override fun saveFilm(film: FactDescriptionDTO) {
         dao.insert(
             HistoryFilm(
                 id = 0,
-                nameFilm = film.nameCinema,
-                lang = film.langCinema,
-                rating = film.ratingCinema,
-                content = film.descCinema
+                nameFilm = film.title,
+                lang = film.original_language,
+                rating = film.popularity,
+                content = film.overview,
+                dataTime = Date().time
             )
         )
     }

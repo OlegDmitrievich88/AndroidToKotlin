@@ -10,7 +10,7 @@ data class HistoryFilm(
     val id: Int,
     val nameFilm: String,
     val lang: String,
-    val rating: String,
+    val rating: Double,
     val content: String,
-   // val dataTime: Long
+    val dataTime: Long
 )
