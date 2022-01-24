@@ -1,5 +1,6 @@
 package com.maksapp.moviesearchapp.View
 
+import android.content.ContentResolver
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -34,7 +35,10 @@ class MainActivity : AppCompatActivity() {
                     .replace(R.id.fragment_container,FragmentBD.newInstance())
                     .addToBackStack("")
                     .commit()}
-            R.id.contact->{}
+            R.id.contact->{supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container,ContactFragment.newInstance())
+                .addToBackStack("")
+                .commit()}
         }
         return true
     }
