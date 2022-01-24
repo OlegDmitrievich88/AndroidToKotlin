@@ -6,20 +6,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.maksapp.moviesearchapp.R
 import com.maksapp.moviesearchapp.databinding.ItemForRvBdBinding
-import com.maksapp.moviesearchapp.model.FactDescriptionDTO
-import com.maksapp.moviesearchapp.model.LocalRepositoryIml
+import com.maksapp.moviesearchapp.model.HistoryFilm
 
-class BdRvAdapter(localRepositoryIml: LocalRepositoryIml) : RecyclerView.Adapter<BdRvAdapter.BdViewHolder>() {
+class BdRvAdapter(private var items: List<HistoryFilm>) : RecyclerView.Adapter<BdRvAdapter.BdViewHolder>() {
 
-    private var items: List<FactDescriptionDTO> = listOf()
+    //private var items: List<HistoryFilm> = listOf()
 
     class BdViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemForRvBdBinding.bind(itemView)
-        fun onBind(items: FactDescriptionDTO) = with(binding){
-            one.text = items.title
-            two.text = items.original_language
-            free.text = items.overview
-            fore.text = items.popularity.toString()
+        fun onBind(items: HistoryFilm) = with(binding){
+            one.text = items.nameFilm
+            two.text = items.lang
+            free.text = items.content
+            fore.text = items.rating.toString()
 
     }
 }

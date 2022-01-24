@@ -4,9 +4,7 @@ import android.app.Application
 import androidx.room.Room.databaseBuilder
 import com.maksapp.moviesearchapp.model.HistoryDAO
 import com.maksapp.moviesearchapp.model.HistoryDataBase
-import kotlinx.coroutines.InternalCoroutinesApi
 
-import kotlinx.coroutines.internal.synchronized
 
 class App: Application() {
 
@@ -27,7 +25,7 @@ class App: Application() {
 
             if (db == null) {
 
-             kotlin.synchronized(HistoryDataBase::class.java){
+            synchronized(HistoryDataBase::class.java){
                     if (db == null){
                         appInstance?.let { app->
                             db = databaseBuilder(

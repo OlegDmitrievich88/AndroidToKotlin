@@ -1,6 +1,6 @@
 package com.maksapp.moviesearchapp.View
 
-import android.content.Intent
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +19,7 @@ import com.maksapp.moviesearchapp.model.*
 class FragmentForActivity: Fragment(), InterfaceForClick {
 
     private lateinit var binding: RsFilmBinding
-   // private val adapter = FilmRvAdapter(this)
+
     private val viewModel: ViewModelFilm by lazy {
         ViewModelProvider(this).get(ViewModelFilm::class.java)
     }
@@ -40,11 +40,6 @@ class FragmentForActivity: Fragment(), InterfaceForClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        binding.apply {
-//            rsFilm.layoutManager = GridLayoutManager(activity,3)
-//            rsFilm.adapter = adapter
-//        }
-
        // requireActivity().startService(Intent(requireContext(),LoadService::class.java))
 
         viewModel.getData().observe(viewLifecycleOwner, Observer {
@@ -52,12 +47,11 @@ class FragmentForActivity: Fragment(), InterfaceForClick {
         })// подписались на изменение данных
         viewModel.loadFromServer()
 
-        //viewModel.getDescriptionFilm()//запросили данные
         binding.apply {
             rsFilm.layoutManager = GridLayoutManager(activity,3)
             rsFilm.adapter = adapter
         }
-       // buildList()
+
         viewModel.getDescriptionFilm()
     }
     private fun render(state: AppState){
@@ -66,6 +60,7 @@ class FragmentForActivity: Fragment(), InterfaceForClick {
                val listCinema: FactDescriptionDTO = state.cinema
                 adapter.setCinema(listCinema)
             }
+            else -> {}
         }
     }
 

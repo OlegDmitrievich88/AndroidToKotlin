@@ -11,33 +11,37 @@ import com.maksapp.moviesearchapp.model.LocalRepositoryIml
 
 class FragmentBD(): Fragment() {
 
-//    private val adapter = BdRvAdapter(LocalRepositoryIml(App.getHistoryDao())).also {
-//
+    private val adapter = BdRvAdapter(LocalRepositoryIml(App.getHistoryDao()).getAllHistory()).also {
+        it.notifyDataSetChanged()
+    }
+    private lateinit var binding: RsForBdBinding
+//    private val viewModel: ViewModelFilm by lazy {
+//        ViewModelProvider(this).get(ViewModelFilm::class.java)
 //    }
-    private lateinit var binding:RsForBdBinding
 
     companion object {
-        fun newInstance() = FragmentForActivity()
+        fun newInstance() = FragmentBD()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = RsForBdBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         binding.apply {
-            val adapter = BdRvAdapter(LocalRepositoryIml(App.getHistoryDao())).also {
-                it.notifyDataSetChanged()
-            }
-            rsBd.layoutManager = GridLayoutManager(activity,1)
+            rsBd.layoutManager = GridLayoutManager(activity, 1)
             rsBd.adapter = adapter
 
         }
     }
+
+
 }

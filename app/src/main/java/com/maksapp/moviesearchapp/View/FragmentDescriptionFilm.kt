@@ -1,6 +1,5 @@
 package com.maksapp.moviesearchapp.View
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,15 +9,13 @@ import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.maksapp.moviesearchapp.ViewModel.ViewModelFilm
 import com.maksapp.moviesearchapp.databinding.ItemDescriptionFilmBinding
-import com.maksapp.moviesearchapp.model.DescriptionDTO
 import com.maksapp.moviesearchapp.model.FactDescriptionDTO
-import com.maksapp.moviesearchapp.model.LoadService
 
 
-class FragmentDescriptionFilm() : Fragment() {
+class FragmentDescriptionFilm : Fragment() {
 
     private lateinit var binding: ItemDescriptionFilmBinding
-   // private lateinit var viewModel: ViewModelFilm
+
    private val viewModel: ViewModelFilm by lazy {
        ViewModelProvider(this).get(ViewModelFilm::class.java)
    }
@@ -51,9 +48,10 @@ class FragmentDescriptionFilm() : Fragment() {
                 imageFilm.load(urlPoster)
             }
         }
-        if (descriptionFilm != null) {
-            viewModel.saveHistory(descriptionFilm)
-        }
+        descriptionFilm?.let { viewModel.saveHistory(it) }
+//        if (descriptionFilm != null) {
+//            viewModel.saveHistory(descriptionFilm)
+//        }
 
     }
 

@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
                     .replace(R.id.fragment_container,FragmentBD.newInstance())
                     .addToBackStack("")
                     .commit()}
+            R.id.contact->{}
         }
         return true
     }

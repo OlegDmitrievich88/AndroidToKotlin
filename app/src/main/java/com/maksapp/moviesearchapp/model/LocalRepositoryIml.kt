@@ -4,27 +4,11 @@ import java.util.*
 
 class LocalRepositoryIml(private val dao: HistoryDAO):LocalRepository{
 
-//    override fun getAllHistory(): List<FactDescriptionDTO> {
-//        return dao.all()
-//            .map { historyFilm ->
-//                FactDescriptionDTO(
-//                    title = historyFilm.nameFilm,
-//                    original_language = historyFilm.lang,
-//                    popularity = historyFilm.rating,
-//                    overview = historyFilm.content
-//
-//
-//
-//
-//                )
-//
-//
-//
-//
-//
-//            }
-//    }
-//
+    override fun getAllHistory(): List<HistoryFilm> {
+        return dao.all()
+
+    }
+
 
 
     override fun saveFilm(film: FactDescriptionDTO) {
