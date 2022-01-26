@@ -1,0 +1,16 @@
+package com.maksapp.moviesearchapp.model
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+data class HistoryFilm( //сущность таблицы
+
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
+    val nameFilm: String,
+    val lang: String,
+    val rating: Double,
+    val content: String,
+    val dataTime: Long
+)
