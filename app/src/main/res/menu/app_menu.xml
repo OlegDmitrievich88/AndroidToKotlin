@@ -13,4 +13,10 @@
         android:icon="@drawable/ic_baseline_contact_phone_24"
         app:showAsAction="ifRoom"
         android:orderInCategory="2"/>
+    <item
+        android:title="GEO"
+        android:id="@+id/geo_location"
+        android:icon="@drawable/ic_baseline_my_location_24"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="3"/>
 </menu>

@@ -39,6 +39,10 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.fragment_container,ContactFragment.newInstance())
                 .addToBackStack("")
                 .commit()}
+            R.id.geo_location->{supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container,FragmentForLocation.newInstance())
+                .addToBackStack("")
+                .commit()}
         }
         return true
     }
