@@ -11,6 +11,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -43,35 +45,53 @@ class ContactFragment : Fragment() {
         checkPermission()
        // getContact()
         //checkPermission()
-    }
 
-    private fun checkPermission() {
-        when{
-            context?.let { ContextCompat.checkSelfPermission(it, Manifest.permission.READ_CONTACTS) } == PERMISSION_GRANTED->{
-                getContact()
-            }
-            shouldShowRequestPermissionRationale(Manifest.permission.READ_CONTACTS)->{
-                context?.let {
-                    AlertDialog.Builder(it)
-                        .setTitle("Доступ нннада")
-                        .setMessage("ощень хочеься")
-                        .setPositiveButton("на доступ"){_,_-> requestPermission()}
-                        .setNegativeButton("не не не"){ dialog,_->dialog.dismiss()}
-                        .create()
-                        .show()
+    }
+    private val permissionResult =
+        context?.let {
+            registerForActivityResult(ActivityResultContracts.RequestPermission()) { result ->
+                when {
+                    result -> getContact()
+                    !shouldShowRequestPermissionRationale(
+                        Manifest.permission.READ_CONTACTS
+                    ) -> {
+                        AlertDialog.Builder(it)
+                            .setTitle("Доступ нннада")
+                            .setMessage("ощень хочеься")
+                            .setPositiveButton("на доступ") { _, _ -> checkPermission() }
+                            .setNegativeButton("не не не") { dialog, _ -> dialog.dismiss() }
+                            .create()
+                            .show()
+
+                    }
+                    else -> Toast.makeText(it, "voy", Toast.LENGTH_LONG).show()
                 }
-            }else->{
-              requestPermission()
             }
         }
+
+    private fun checkPermission() {
+        permissionResult?.launch(Manifest.permission.READ_CONTACTS)
+//        when{
+//            context?.let { ContextCompat.checkSelfPermission(it, Manifest.permission.READ_CONTACTS) } == PERMISSION_GRANTED->{
+//                getContact()
+//            }
+//            shouldShowRequestPermissionRationale(Manifest.permission.READ_CONTACTS)->{
+//                context?.let {
+//                    AlertDialog.Builder(it)
+//                        .setTitle("Доступ нннада")
+//                        .setMessage("ощень хочеься")
+//                        .setPositiveButton("на доступ"){_,_-> requestPermission()}
+//                        .setNegativeButton("не не не"){ dialog,_->dialog.dismiss()}
+//                        .create()
+//                        .show()
+//                }
+//            }else->{
+//              requestPermission()
+//            }
+//        }
     }
 
-    private fun requestPermission() {
-       // ActivityCompat.requestPermissions(context as Activity, arrayOf(Manifest.permission.READ_CONTACTS),42)
-        requestPermissions(arrayOf(Manifest.permission.READ_CONTACTS), 42)
 
-
-    }
 
 
     private fun getContact() {
