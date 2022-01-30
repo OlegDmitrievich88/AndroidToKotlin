@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.maksapp.moviesearchapp.View.FragmentForActivity.Companion.newInstance
 import com.maksapp.moviesearchapp.R
+import com.maksapp.moviesearchapp.View.StartFragment.Companion.newInstanceTwo
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,13 +18,13 @@ class MainActivity : AppCompatActivity() {
 
         if(savedInstanceState == null){
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, newInstance())
+                .replace(R.id.fragment_container, newInstanceTwo())
                 .addToBackStack(null)
                 .commit()
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.app_menu,menu)
         return true
     }
@@ -31,15 +32,17 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.history->{
-               supportFragmentManager.beginTransaction()
+                    supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container,FragmentBD.newInstance())
                     .addToBackStack("")
                     .commit()}
-            R.id.contact->{supportFragmentManager.beginTransaction()
+            R.id.contact->{
+                 supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container,ContactFragment.newInstance())
                 .addToBackStack("")
                 .commit()}
-            R.id.geo_location->{supportFragmentManager.beginTransaction()
+            R.id.geo_location->{
+                 supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container,FragmentForLocation.newInstance())
                 .addToBackStack("")
                 .commit()}

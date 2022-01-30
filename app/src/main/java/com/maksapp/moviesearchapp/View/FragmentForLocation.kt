@@ -89,6 +89,7 @@ class FragmentForLocation: Fragment() {
                             .setMessage("${location.latitude}${location.longitude}")
                             .show()
                     }
+
                 }
             }else{
                 val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)

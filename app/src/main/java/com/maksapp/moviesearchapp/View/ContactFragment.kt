@@ -10,6 +10,7 @@ import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -28,6 +29,7 @@ class ContactFragment : Fragment() {
         text = ""
     }
 
+
     companion object{
         fun newInstance() = ContactFragment()
     }
@@ -42,13 +44,18 @@ class ContactFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        checkPermission()
-       // getContact()
+        val button: Button? = view.findViewById(R.id.button_contact)
+        button?.setOnClickListener {
+            checkPermission()
+        }
+       // checkPermission()
+        //getContact()
         //checkPermission()
 
     }
     private val permissionResult =
         context?.let {
+
             registerForActivityResult(ActivityResultContracts.RequestPermission()) { result ->
                 when {
                     result -> getContact()
@@ -70,6 +77,7 @@ class ContactFragment : Fragment() {
         }
 
     private fun checkPermission() {
+
         permissionResult?.launch(Manifest.permission.READ_CONTACTS)
 //        when{
 //            context?.let { ContextCompat.checkSelfPermission(it, Manifest.permission.READ_CONTACTS) } == PERMISSION_GRANTED->{
