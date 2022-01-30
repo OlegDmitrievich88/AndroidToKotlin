@@ -1,9 +1,8 @@
 package com.maksapp.moviesearchapp.View
 
 import android.Manifest
-import android.app.Activity
 import android.content.ContentResolver
-import android.content.pm.PackageManager.PERMISSION_GRANTED
+import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
 import android.provider.ContactsContract
@@ -15,8 +14,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 
 import androidx.fragment.app.Fragment
 import com.maksapp.moviesearchapp.R
@@ -25,9 +22,9 @@ import com.maksapp.moviesearchapp.R
 
 class ContactFragment : Fragment() {
 
-    private val contactList = view?.findViewById<TextView>(R.id.contacts)?.apply {
-        text = ""
-    }
+//    private val contactList = view?.findViewById<TextView>(R.id.contacts)?.apply {
+//        text = ""
+//    }
 
 
     companion object{
@@ -46,15 +43,15 @@ class ContactFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val button: Button? = view.findViewById(R.id.button_contact)
         button?.setOnClickListener {
-            checkPermission()
+           startActivity(Intent(context, PermissionActivity::class.java))
         }
-       // checkPermission()
+        checkPermission()
         //getContact()
         //checkPermission()
 
     }
     private val permissionResult =
-        context?.let {
+       // context?.let {
 
             registerForActivityResult(ActivityResultContracts.RequestPermission()) { result ->
                 when {
@@ -62,19 +59,21 @@ class ContactFragment : Fragment() {
                     !shouldShowRequestPermissionRationale(
                         Manifest.permission.READ_CONTACTS
                     ) -> {
-                        AlertDialog.Builder(it)
-                            .setTitle("Доступ нннада")
-                            .setMessage("ощень хочеься")
-                            .setPositiveButton("на доступ") { _, _ -> checkPermission() }
-                            .setNegativeButton("не не не") { dialog, _ -> dialog.dismiss() }
-                            .create()
-                            .show()
+                        context?.let {
+                            AlertDialog.Builder(it)
+                                .setTitle("Доступ нннада")
+                                .setMessage("ощень хочеься")
+                                .setPositiveButton("на доступ") { _, _ -> checkPermission() }
+                                .setNegativeButton("не не не") { dialog, _ -> dialog.dismiss() }
+                                .create()
+                                .show()
+                        }
 
                     }
-                    else -> Toast.makeText(it, "voy", Toast.LENGTH_LONG).show()
+                    else -> Toast.makeText(context, "voy", Toast.LENGTH_LONG).show()
                 }
             }
-        }
+
 
     private fun checkPermission() {
 
@@ -116,6 +115,7 @@ class ContactFragment : Fragment() {
             )
 
             cursor?.let { cursor ->
+                 val contactList = view?.findViewById<TextView>(R.id.contacts)
                 val columnIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)
                 if (columnIndex >= 0) {
                     for (i in 0..cursor.count) {

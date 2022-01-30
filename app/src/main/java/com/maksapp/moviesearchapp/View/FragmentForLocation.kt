@@ -50,26 +50,28 @@ class FragmentForLocation: Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.M)
     private val permissionResult =
-        context?.let {
+
             registerForActivityResult(ActivityResultContracts.RequestPermission()) { result ->
                 when {
                     result -> showLocation()
                     !shouldShowRequestPermissionRationale(
                         Manifest.permission.ACCESS_FINE_LOCATION
                     ) -> {
-                        AlertDialog.Builder(it)
-                            .setTitle("Доступ нннада")
-                            .setMessage("ощень хочеься")
-                            .setPositiveButton("на доступ") { _, _ -> requestPermission() }
-                            .setNegativeButton("не не не") { dialog, _ -> dialog.dismiss() }
-                            .create()
-                            .show()
+                        context?.let {
+                            AlertDialog.Builder(it)
+                                .setTitle("Доступ нннада")
+                                .setMessage("ощень хочеься")
+                                .setPositiveButton("на доступ") { _, _ -> requestPermission() }
+                                .setNegativeButton("не не не") { dialog, _ -> dialog.dismiss() }
+                                .create()
+                                .show()
+                        }
 
                     }
                     else -> requestPermission()
                 }
             }
-        }
+
 
     @SuppressLint("MissingPermission")
     private fun showLocation() {
@@ -105,7 +107,7 @@ class FragmentForLocation: Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun requestPermission() {
-        permissionResult?.launch(Manifest.permission_group.LOCATION)
+        permissionResult.launch(Manifest.permission.ACCESS_FINE_LOCATION)
     }
 
 
